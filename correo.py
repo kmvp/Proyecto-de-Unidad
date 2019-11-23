@@ -1,23 +1,30 @@
-# import necessary packages
+# importacion de los paquetes necesarios
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
-# create message object instance
+
+# crear instancia de objeto de mensaje
 msg = MIMEMultipart()
 message = "Hola! Ya amanecio, es hora de despertar :D"
-# setup the parameters of the message
-password = "Florecita29.."
-msg['From'] = "kari.oc3@gmail.com"
-msg['To'] = "kari_oc3@hotmail.com"
-msg['Subject'] = "Hora de despertar!"
-# add in the message body
+
+# configurar los parametros del mensaje
+password = "contrasena"
+msg['De'] = "kari.oc3@gmail.com"
+msg['Para'] = "kari_oc3@hotmail.com"
+msg['Tema'] = "Hora de despertar!"
+
+# agregar en el cuerpo del mensaje
 msg.attach(MIMEText(message, 'plain'))
-#create server
+
+# crear servidor 
 server = smtplib.SMTP('smtp.gmail.com: 587')
 server.starttls()
-# Login Credentials for sending the mail
-server.login(msg['From'], password)
-# send the message via the server.
-server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+# Credenciales de inicio de sesión para enviar el correo
+server.login(msg['De'], password)
+
+# Enviar el mensaje a través del servidor
+server.sendmail(msg['De'], msg['Para'], msg.as_string())
 server.quit()
-print ("successfully sent email to %s:" % (msg['To']))
+
+print ("Correo enviado satisfactoriamente desde%s:" % (msg['Para']))
